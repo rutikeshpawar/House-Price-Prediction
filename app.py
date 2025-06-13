@@ -32,7 +32,7 @@ def predict():
     features_array = np.array([features])
     
     prediction = model.predict(features_array)
-    output = route(prediction[0],2)
+    output = round(prediction[0],2)
     
     return render_template('index.html', prediction_text=f"predicted price: {output}")
 

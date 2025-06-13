@@ -1,60 +1,40 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Boston Housing Price Prediction</title>
-    </head>
-    <body>
-        <h2>Boston Housing Price Prediction</h2>
-        <form action="/predic" method="post">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Boston Housing Price Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 
-            <label>CRIM:<label><br>
-            <input type="text" name="CRIM"><br>
+    <div class="container mt-5">
+        <div class="card shadow-lg rounded">
+            <div class="card-body">
+                <h2 class="card-title text-center mb-4">Boston Housing Price Prediction</h2>
 
-            <label>ZN:<label><br>
-            <input type="text" name="ZN"><br>
+                <form action="/predict" method="post">
+                    <div class="row g-3">
+                        {% for feature in ['CRIM', 'ZN', 'INDUS', 'CHAS', 'NOX', 'RM', 'AGE', 'DIS', 'RAD', 'TAX', 'PTRATIO', 'B', 'LSTAT'] %}
+                        <div class="col-md-4">
+                            <label for="{{ feature }}" class="form-label">{{ feature }}</label>
+                            <input type="text" name="{{ feature }}" class="form-control" id="{{ feature }}" required>
+                        </div>
+                        {% endfor %}
+                    </div>
 
-            <label>INDUS:<label><br>
-            <input type="text" name="INDUS"><br>
-            
-            <label>CHAS:<label><br>
-            <input type="text" name="CHAS"><br>
+                    <div class="d-grid mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg">Predict Price</button>
+                    </div>
+                </form>
 
-            <label>NOX:<label><br>
-            <input type="text" name="NOX"><br>
+                {% if prediction_text %}
+                <div class="alert alert-success text-center mt-4">
+                    <h4>{{ prediction_text }}</h4>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 
-            <label>RM:<label><br>
-            <input type="text" name="RM"><br>
-
-            <label>AGE:<label><br>
-            <input type="text" name="AGE"><br>
-
-            <label>DIS:<label><br>
-            <input type="text" name="DIS"><br>
-
-            <label>RAD:<label><br>
-            <input type="text" name="RAD"><br>
-
-            <label>TAX:<label><br>
-            <input type="text" name="TAX"><br>
-
-            <label>PTRATIO:<label><br>
-            <input type="text" name="PTRATIO"><br>
-
-            <label>B:<label><br>
-            <input type="text" name="B"><br>
-
-            <label>LSTAT:<label><br>
-            <input type="text" name="LSTAT"><br>
-
-            <br>
-            <input type ="sumbit" value="Predict">
-
-            </form>
-
-            {% if Prediction_text %}
-            <h3>{{ Prediction_text }}</h3>
-            {% endif %}
-
-        </body>
-        </html>
-        
+</body>
+</html>
